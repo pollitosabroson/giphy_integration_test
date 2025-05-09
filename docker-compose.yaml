@@ -1,0 +1,13 @@
+services:
+
+  app:
+    container_name: giphy-test
+    build: .
+    ports:
+      - "8000:8000"
+    command: uvicorn main:app --host 0.0.0.0 --reload # python -m http.server 8001 #
+    volumes:
+      - ./src/:/app
+    tty: true
+    environment:
+      - GIPHY_API_KEY=XW9F9nTl3qsdSUZxMhPUp4UOBryQfAkx
