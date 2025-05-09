@@ -1,4 +1,4 @@
-# giphy - Chat with Giphy Integration
+# Giphy - Chat with Giphy Integration
 
 This project implements a chat application with the capability to respond with text, Text-to-Speech (TTS), and generate image/video responses, including integration with the Giphy API to fetch GIFs based on text.
 
@@ -9,6 +9,10 @@ Ensure you have the following installed on your system:
 * **Docker:** For containerization and easy execution of the application. You can install it from [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/).
 * **Docker Compose:** Usually installed along with Docker Desktop. If you need to install it separately, refer to the official documentation: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/).
 * **Giphy API Key:** You will need a Giphy API key to use the GIF search functionality. You can obtain one for free by creating a developer account at [https://developers.giphy.com/dashboard/](https://developers.giphy.com/dashboard/).
+* **Python 3.9+:** While the application runs in a Docker container, you'll need Python and pip to install development dependencies and run tests locally (optional).
+* **pip:** The Python package installer.
+* **pre-commit:** To ensure code quality before each commit. It can be installed with `pip install pre-commit`.
+* **pytest:** A Python testing framework. It can be installed with `pip install pytest`.
 
 ## Configuration
 
@@ -29,6 +33,13 @@ Ensure you have the following installed on your system:
 
     Replace `YOUR_GIPHY_API_KEY` with your actual Giphy API key.
 
+3.  **Install development dependencies (optional, for running tests and linters locally):**
+
+    ```bash
+    pip install -r requirements.txt
+    pre-commit install
+    ```
+
 ## Execution
 
 The easiest way to run the application is using Docker Compose:
@@ -45,7 +56,7 @@ The easiest way to run the application is using Docker Compose:
 
 3.  **Access the FastAPI application:**
 
-    Once the containers are running, you can access the giphy API (with Giphy integration) in your browser or using a tool like `curl` at the following addresses:
+    Once the containers are running, you can access the Giphy API (with Giphy integration) in your browser or using a tool like `curl` at the following addresses:
 
     * **Endpoint to get a GIF by text:** `http://localhost:8000/get_giphy_gif?text=<YOUR_SEARCH_TEXT>`
         Replace `<YOUR_SEARCH_TEXT>` with the text to search for the GIF (e.g., `funny cat`).
@@ -67,6 +78,46 @@ The easiest way to run the application is using Docker Compose:
 
     ```
     http://localhost:8000/redoc
+    ```
+
+## Running Tests
+
+The project includes unit tests to verify the correct functionality of the Pydantic models and API endpoints.
+
+### Running Inside the Docker Container
+
+1.  **Ensure the application is running in the container (see the Execution section).**
+
+2.  **Enter the Docker container:**
+
+    ```bash
+    docker exec -it Giphy-test bash
+    ```
+
+3.  **Navigate to the application root directory inside the container:**
+
+    ```bash
+    cd /app
+    ```
+
+4.  **Run the tests using `pytest`:**
+
+    ```bash
+    pytest -v tests/
+    ```
+
+    This will execute all test files within the `tests` directory.
+
+### Running Locally (Optional)
+
+If you have installed the development dependencies locally:
+
+1.  **Navigate to the root directory of the project in your terminal.**
+
+2.  **Run the tests using `pytest`:**
+
+    ```bash
+    pytest -v tests/
     ```
 
 ## Stopping the Application
