@@ -10,4 +10,4 @@ services:
       - ./src/:/app
     tty: true
     environment:
-      - GIPHY_API_KEY=XW9F9nTl3qsdSUZxMhPUp4UOBryQfAkx
+      GIPHY_API_KEY=${GIPHY_API_KEY}
